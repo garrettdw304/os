@@ -44,11 +44,11 @@ init_heap:
     rts
 ; -----------------------------------------------------------------
 
-; -----word kalloc_mem(word size)-----------------------------
+; -----word kalloc(word size)-----------------------------
 ; size - The number of bytes to allocate. Stored in R0..1.
 ; Returns the address of the first allocated byte or 0 if no space could be allocated
 ; returned in R0..R1
-kalloc_mem:
+kalloc:
     ; dont want to be interrupted while modifying the heap.
     php
     sei
@@ -157,7 +157,7 @@ success$
     plx
     pla
     rti ; pull processor flags register while returning
-; -----END kalloc_mem-----------------------------------------
+; -----END kalloc-----------------------------------------
 
 ; -----split_mcb---------------------------------------------------
 ; params:
@@ -165,9 +165,9 @@ success$
 ; R2..3: mcb*. A pointer to the mcb that we want to split.
 ; returns:
 ; R0..1: a pointer to mcb->next. Not expected to be needed by the caller,
-;        I just dont want to preserve these registers because size is not needed by kalloc_mem() after a call to this function.
+;        I just dont want to preserve these registers because size is not needed by kalloc() after a call to this function.
 ; R4..5: a pointer to newMcb.
-; #NOTE: Does not preserve A, X or Y registers. Mainly for use in kalloc_mem().
+; #NOTE: Does not preserve A, X or Y registers. Mainly for use in kalloc().
 split_mcb:
     ; Split the unrequested bytes off of the end of cur
     ;      (R4..5)= R0..1(16) + R2..3(16) + 8-bitConst

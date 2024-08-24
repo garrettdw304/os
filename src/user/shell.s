@@ -71,7 +71,7 @@ shell:
     sta R0
     lda #>BUF_SIZE
     sta R1
-    jsr kalloc_mem
+    jsr kalloc ; TODO: Use user space heap
     ; move char buffer pointer into its permanent location
     lda R0
     sta BUF_PTR_REG
