@@ -8,6 +8,8 @@ IO_SCHEDULER_S = 1
     .include header.s
     .include pcb_table.s
 
+; TODO: Create driver tables
+
 ; Checks for any complete io requests,
 ; returns the results of the requests to their associated processes
 ; and unblocks the processes.
@@ -24,6 +26,7 @@ request_io:
     rts
 
 ; Called when an interrupt occurs.
+; Polls every installed driver to find the one that can handle the interrupt.
 invoke_driver:
     rts
 

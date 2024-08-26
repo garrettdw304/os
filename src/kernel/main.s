@@ -41,6 +41,8 @@ loop$
 irq:
     pha
 
+    ; TODO: Handle all os managed interrupts then if none of those devices caused the interrupt, try running through the drivers.
+
     lda SIMPLE_TIMER_BASE_REG ; load interrupting reg
     cmp #0
     beq timeQNotOver$

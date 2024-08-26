@@ -9,6 +9,26 @@ SYS_EXIT = 0
 SYS_YIELD = 1
 SYS_IOREQ = 2 ; R0..1 -> Struct to pass to driver's begin function
 SYS_KALLOC = 3 ; R0..1 -> Number of bytes to allocate. R0..1 <- Address of allocated bytes
+; Allocates an RS-232 port
+; R0 -> The RS-232 port to allocate, or $FF to select any available one.
+; R1 -> 0 if the process should be blocked until the port can be allocated. Non-zero if it should not block.
+; R0 <- The RS-232 port that was allocated, or $FF if the selected port (or none) could be allocated.
+SYS_ALLOC_IO = 4
+; Reads from a serial port until the buffer is full. The buffer is NOT terminated with a string terminator.
+; This read request DOES NOT do special handling of the data
+; (such as handling backspace or detecting the enter key or arrow keys).
+; R0..1 -> The buffer to store into.
+; R2 -> The size of the buffer.
+SYS_READ = 7
+; Reads from a serial port until the buffer is full or a carriage return followed by a new line is detected.
+; This read request DOES do special handling of the data such as handling backspace, detecting the enter key
+; and arrow keys and also echos received characters.
+; R0..1 -> The buffer to store into.
+; R2 -> The size of the buffer.
+SYS_READ_LINE = 8
+SYS_WRITE = 9
+SYS_REG_DRIVER = 10
+SYS_UNREG_DRIVER = 11
 FIRST_INVALID_SYS_CALL = 4 ; TODO: Increment as more sys_calls are added
 
 ; Sys call jump table
