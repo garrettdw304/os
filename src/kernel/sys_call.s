@@ -1,4 +1,4 @@
-    .include SYS_CALL_S
+    .ifndef SYS_CALL_S
 SYS_CALL_S = 1
 
 ; This file is the interface between kernel and user space.
@@ -32,16 +32,16 @@ FIRST_INVALID_SYS_CALL = 9 ; TODO: Increment as more sys_calls are added
 
 ; Sys call jump table
 sys_call_table_lo:
-    .byte <(schedule_process-1)
-    .byte <(schedule_process-1)
+    .byte <(switch_process-1)
+    .byte <(switch_process-1)
     .byte <(sys_kalloc_handler-1)
     .byte <(sys_serial_open_handler-1)
     .byte <(sys_serial_read_handler-1)
     .byte <(sys_serial_write_handler-1)
     .byte <(sys_serial_close_handler-1)
 sys_call_table_hi:
-    .byte >(schedule_process-1)
-    .byte >(schedule_process-1)
+    .byte >(switch_process-1)
+    .byte >(switch_process-1)
     .byte >(sys_kalloc_handler-1)
     .byte >(sys_serial_open_handler-1)
     .byte >(sys_serial_read_handler-1)
@@ -97,7 +97,7 @@ sys_kalloc_handler:
 
 sys_serial_open_handler:
     ; Try to allocate the device, if fail, block if specified to do so
-    jsr request_serial_io
+    jsr allocate_serial_port
     rts
 
 sys_serial_read_handler:
