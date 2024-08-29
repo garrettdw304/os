@@ -11,10 +11,10 @@
 ; VIA           D000-D00F           16          Its gpio pin connections are defined in a seperate table in this file below
 ; PSC           D010-D010           1           Programmable Stack Controller
 ; Simple Timer  D011-D014           4
-; UART 0        D015-D018           4           The UART used by default shell program
-; UART 1        D019-D01C           4
-; UART 2        D01D-D020           4
-; UART 3        D021-D024           4
+; UART 0        D015-D018           4           COM0; The UART used by default shell program
+; UART 1        D019-D01C           4           COM1
+; UART 2        D01D-D020           4           COM2
+; UART 3        D021-D024           4           COM3
 
 ; ROM           E000-FFFF           8192
 ; |-------------------------------------------------------------------------|
@@ -44,11 +44,17 @@ ST_INTERRUPTING =           $D011
 ST_MODE =                   $D012
 ST_LO_CYCLES =              $D013
 ST_HI_CYCLES =              $D014
-UART_RX =                   $D015
-UART_TX =                   $D015
-UART_STAT =                 $D016
-UART_CTRL =                 $D017
-UART_CMD =                  $D018
+UART0_BASE_ADDR =           $D015
+UART0_RX =                  $D015
+UART0_TX =                  $D015
+UART0_STAT =                $D016
+UART0_CTRL =                $D017
+UART0_CMD =                 $D018
+UART_RX =                   0
+UART_TX =                   0
+UART_STAT =                 1
+UART_CTRL =                 2
+UART_CMD =                  3
 
 ROM_BASE_REG =              $E000
 ROM_LENGTH =                8192

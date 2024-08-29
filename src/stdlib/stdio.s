@@ -40,7 +40,7 @@ LF = 10 ; line feed, aka new line (\n)
 
 ; A -> char to write
 printc:
-    sta UART_TX
+    sta UART0_TX
     jsr transmit_delay
     rts
 
@@ -111,7 +111,7 @@ println:
 ; A <- char received
 readc:
     jsr wait_for_input
-    lda UART_RX
+    lda UART0_RX
     rts
 
 ; Reads a line into the char buffer.
@@ -166,7 +166,7 @@ returnNoTerminatingChar$
 wait_for_input:
     pha
 loop$
-    lda UART_STAT
+    lda UART0_STAT
     and #%00001000
     cmp #%00001000
     bne loop$

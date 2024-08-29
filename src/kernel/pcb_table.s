@@ -7,17 +7,7 @@ PCB_TABLE_S = 1
 ; because it contains information related to other
 ; systems such as the io scheduler.
 
-PCB_MAX_COUNT = $10 ; Max 16 pcbs. If this is adjusted, make sure that the _TABLE offsets are seperated enough.
-
-; IO scheduler fields
-; Defines which driver will handle the io request
-PCB_IOCB_DEVICE_TABLE = $290
-; Passed to the driver when the request begins to be serviced
-PCB_IOCB_OPERATION_TABLE = $2A0
-; The pointer to the struct of arguments passed when the io request was made.
-; Passed to the driver when the request begins to be serviced
-PCB_IOCB_ARGSLSB_TABLE = $2B0
-PCB_IOCB_ARGSMSB_TABLE = $2C0
+PCB_MAX_COUNT = $10 ; Max 16 pcbs. If this is adjusted, make sure that the *_TABLE offsets are seperated enough.
 
 ; Process scheduler fields
 PCB_EXESTATE_TABLE = $2D0

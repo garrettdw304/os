@@ -8,7 +8,16 @@ IO_SCHEDULER_S = 1
     .include header.s
     .include pcb_table.s
 
-; TODO: Create driver tables
+COM0 = 0
+COM1 = 1
+COM2 = 2
+COM3 = 3
+
+; COM* in, device base addr out
+com_base_addrs_lo:
+    .byte <(UART0_BASE_ADDR)
+com_base_addrs_hi:
+    .byte >(UART0_BASE_ADDR)
 
 ; Checks for any complete io requests,
 ; returns the results of the requests to their associated processes
@@ -19,15 +28,9 @@ handle_completed_io_requests:
 ; TODO: Store the number of io requests that are being actively serviced so we dont have to check all 16 possible requests every time
 ;  (would it just be faster to check them all instead of checking this number? Maybe just make it a boolean, is there at least one...)
 
-; Begins servicing the io request if the device is free,
-; or adds the request to the device's queue if it is already servicing a request.
-; R0..1 -> Args struct to pass to driver's begin function
-request_io:
-    rts
-
-; Called when an interrupt occurs.
-; Polls every installed driver to find the one that can handle the interrupt.
-invoke_driver:
+; R0 -> The port to allocate (See COM*)
+; R0 <- Zero if already allocated by another process, non-zero if this process owns this port.
+allocate_serial_port:
     rts
 
     .endif ; end include guard

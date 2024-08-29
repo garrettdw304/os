@@ -78,12 +78,12 @@ shell:
     lda R1
     sta BUF_PTR_REG+1
     ; software reset
-    sta UART_STAT ; value is dont cares
+    sta UART0_STAT ; value is dont cares
     ; init ctrl and cmd register
     lda #%00011110 ; 1 stop bit [1], 8 data bits [2], RCS = baud rate [1], 9600 baud rate [4]
-    sta UART_CTRL
+    sta UART0_CTRL
     lda #%00001011 ; dont care [2], parity disabled [1], echo off [1], trans intr ctrl off req to send pin low [1], disable req interrupts [1], data terminal ready [1] (starts enabled interrupts)
-    sta UART_CMD
+    sta UART0_CMD
     PRINT init_alt_buf_str
 loop$
     lda #'>'
