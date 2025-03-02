@@ -5,7 +5,6 @@ WHOLE_BUILD = 1 ; will tell .s files if they are allowed to include nmi, irq rst
     .incdir ../stdlib
     .incdir ../user
     .include header.s
-    .include io_scheduler.s
     .include memory_map.s
     .include heap_manager.s
     .include process_scheduler.s

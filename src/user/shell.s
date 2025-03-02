@@ -9,8 +9,7 @@ cls_cmd_str: .asciiz "cls"
 print_pcbs_cmd_str: .asciiz "print"
 shutdown_cmd_str: .asciiz "shutdown"
 kill_cmd_str: .asciiz "kill "
-monitor_store_cmd_str: .asciiz "monitor store "
-monitor_load_cmd_str: .asciiz "monitor load "
+help_cmd_str: .asciiz "help"
 
 COMMAND_TABLE_LEN = 7
 command_table_str_lo:
@@ -19,32 +18,28 @@ command_table_str_lo:
     .byte <(print_pcbs_cmd_str)
     .byte <(shutdown_cmd_str)
     .byte <(kill_cmd_str)
-    .byte <(monitor_store_cmd_str)
-    .byte <(monitor_load_cmd_str)
+    .byte <(help_cmd_str)
 command_table_str_hi:
     .byte >(create_process_cmd_str)
     .byte >(cls_cmd_str)
     .byte >(print_pcbs_cmd_str)
     .byte >(shutdown_cmd_str)
     .byte >(kill_cmd_str)
-    .byte >(monitor_store_cmd_str)
-    .byte >(monitor_load_cmd_str)
+    .byte >(help_cmd_str)
 command_table_handler_lo:
     .byte <(create_process_ch-1)
     .byte <(cls_ch-1)
     .byte <(print_pcbs_ch-1)
     .byte <(shutdown_ch-1)
     .byte <(kill_ch-1)
-    .byte <(monitor_store_ch-1)
-    .byte <(monitor_load_ch-1)
+    .byte <(help_ch-1)
 command_table_handler_hi:
     .byte >(create_process_ch-1)
     .byte >(cls_ch-1)
     .byte >(print_pcbs_ch-1)
     .byte >(shutdown_ch-1)
     .byte >(kill_ch-1)
-    .byte >(monitor_store_ch-1)
-    .byte >(monitor_load_ch-1)
+    .byte >(help_ch-1)
 
 init_alt_buf_str:
     .byte $1B
@@ -57,7 +52,7 @@ print_pcbs_header_str: .asciiz "ID         STATE      STKPG      SP"
 shutdown_notification_str: .asciiz "System will now shutdown."
 kill_fail_str: .asciiz "Process ID out of range (0-F)."
 kill_success_str: .asciiz "Process killed."
-monitor_exit_str: .asciiz "Monitor exited."
+help_str: .ascii "create. cls. print. shutdown. kill <pcb #>. help."
 
 BUF_SIZE = 128
 
@@ -314,11 +309,8 @@ return$
     pla
     rts
 
-monitor_store_ch:
-    jsr monitor_store
-    rts
-monitor_load_ch:
-    jsr monitor_load
+help_ch:
+    PRINT_LN help_str
     rts
 
     .endif

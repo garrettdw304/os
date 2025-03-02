@@ -38,18 +38,22 @@ VIA_PCR_REG =               $D00C
 VIA_IFR_REG =               $D00D
 VIA_IER_REG =               $D00E
 VIA_IORA_NOHS_REG =         $D00F
+
 STK_PG_CTRL_REG =           $D010 ; stack page control register. Write to set the page for page 0x01 to remap to.
+
 SIMPLE_TIMER_BASE_REG =     $D011 ; +0 -> INTERRUPTING, +1 -> MODE, +2 -> LO CYCLES, +3 -> HI CYCLES
 ST_INTERRUPTING =           $D011
 ST_MODE =                   $D012
 ST_LO_CYCLES =              $D013
 ST_HI_CYCLES =              $D014
+
 UART0_BASE_ADDR =           $D015
 UART0_RX =                  $D015
 UART0_TX =                  $D015
 UART0_STAT =                $D016
 UART0_CTRL =                $D017
 UART0_CMD =                 $D018
+
 UART_RX =                   0
 UART_TX =                   0
 UART_STAT =                 1
