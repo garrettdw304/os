@@ -9,7 +9,6 @@ WHOLE_BUILD = 1 ; will tell .s files if they are allowed to include nmi, irq rst
     .include heap_manager.s
     .include process_scheduler.s
     .include stdio.s
-    .include monitor.s
     .include shell.s
     .include string.s
     .include sys_call.s
