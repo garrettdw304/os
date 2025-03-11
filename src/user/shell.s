@@ -11,7 +11,7 @@ shutdown_cmd_str: .asciiz "shutdown"
 kill_cmd_str: .asciiz "kill "
 help_cmd_str: .asciiz "help"
 
-COMMAND_TABLE_LEN = 7
+COMMAND_TABLE_LEN = 6
 command_table_str_lo:
     .byte <(create_process_cmd_str)
     .byte <(cls_cmd_str)
