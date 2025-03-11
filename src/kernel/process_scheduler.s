@@ -49,6 +49,7 @@ RUNNING_PCB = $FF
 ; Switches the current process out for another ready process
 ; Y -> What to do with the current process (SYS_EXIT/SYS_YIELD)
 switch_process:
+    php
     pha
     phx
     phy
