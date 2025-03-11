@@ -113,7 +113,7 @@ loop$
     ; not equal -> this pcb is not in the ready state, continue loop if there are more pcbs
     ; if this pcb is blocked, set blockedExists flag so that we know there is atleast a blocked pcb (if there is not and there is no ready pcb's either, that implies that there are no pcbs and so we can go back to global context)
     cmp #EXESTATE_TERMINATED
-    bne terminated$
+    beq terminated$
     ; if its not terminated, mark our flag in R1 indicateding that there are blocked pcbs to wait on if there are no pcbs ready to take the cpu yet
     lda #1
     sta R1
