@@ -45,8 +45,7 @@ sys_call:
     cpy #FIRST_INVALID_SYS_CALL
     bcc valid$
     ; Just crash the process (exit) if the sys_call is invalid
-    lda #SYS_EXIT
-    sta R0
+    ldy #SYS_EXIT
 valid$
     ; Jump to appropriate handler using the jump table
     jsr jump$ ; store return address to stack
