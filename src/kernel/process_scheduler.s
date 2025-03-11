@@ -174,10 +174,10 @@ foundReady$
     PULLR R2
     PULLR R1
     PULLR R0
-    plx
     ply
+    plx
     pla
-    rts
+    rti
 
 ; ----------------------
 ; used by the kernel when starting up the OS to switch in the first process while taking into account that there is not already one running.
